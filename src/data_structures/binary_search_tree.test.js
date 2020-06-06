@@ -102,25 +102,39 @@ dataStructures.forEach(TargetDS => {
       });
     });
 
-    describe('delete', () => {
+     describe('delete', () => {
       it('returns the value for the removed record', () => {
-
+        bst.insert('test', 'second value');
+        expect(bst.count()).toBe(1);
+        expect(bst.delete('test')).toBe('second value')
+        expect(bst.count()).toBe(0);
       });
 
       it('returns undefined if the record was not found', () => {
-
+        expect(bst.delete('foo')).toBe(undefined)
       });
 
       it('reduces the count by 1', () => {
-
+        bst.insert('test', 'second value');
+        expect(bst.count()).toBe(1);
+        expect(bst.delete('test')).toBe('second value');
+        expect(bst.count()).toBe(0);
       });
 
       it('omits the removed record from iteration results', () => {
-
+        bst.insert('for', 'second value');
+        bst.delete('for')
+        expect(bst.lookup('for')).toBe(undefined)
       });
 
       it('can remove every element in a tree', () => {
+        bst.insert('key', 'value')
+        bst.delete('key')
+        expect(bst.count()).toBe(0)
+      });
 
+      it('doesnt do anything if the node does not exist', () => {
+        expect(bst.delete('key')).toBe(undefined)
       });
 
       describe('scenarios', () => {
